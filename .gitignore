@@ -1,0 +1,11 @@
+### Gradle template
+.gradle
+.idea
+gradle/
+gradlew
+gradlew.bat
+out
+*iml
+*.ipr
+*.iws
+build

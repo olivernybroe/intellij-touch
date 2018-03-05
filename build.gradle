@@ -1,0 +1,33 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.2.18"
+}
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+intellij {
+    pluginName 'intellij-touch'
+}
+
+group 'dk.lost_world'
+
+version 0.1
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "http://maven-eclipse.github.io/maven" }
+}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile group: 'com.github.jiconfont', name: 'jiconfont', version: '1.0.0'
+    compile group: 'com.thizzer.jtouchbar', name: 'jtouchbar', version: '0.1.0-SNAPSHOT'
+    compile group: 'com.github.jiconfont', name: 'jiconfont-swing', version: '1.0.0'
+    compile group: 'com.github.jiconfont', name: 'jiconfont-font_awesome', version: '4.7.0.0'
+}

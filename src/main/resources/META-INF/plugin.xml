@@ -1,0 +1,36 @@
+<idea-plugin>
+    <id>dk.lost_world.intellij-touch</id>
+    <name>Plugin display name here</name>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationService serviceImplementation="dk.lost_world.intellij_touch.TouchBar"/>
+    </extensions>
+
+    <actions>
+        <group id="TouchBar" class="dk.lost_world.intellij_touch.TouchBarGroup" popup="true"
+               text="Touch Bar" description="Extending AnAction Demo">
+            <add-to-group group-id="ViewMenu" anchor="first"/>
+        </group>
+
+    </actions>
+
+    <project-components>
+        <component>
+            <implementation-class>dk.lost_world.intellij_touch.TouchBarComponent</implementation-class>
+            <interface-class>dk.lost_world.intellij_touch.TouchBarComponent</interface-class>
+        </component>
+    </project-components>
+</idea-plugin>
