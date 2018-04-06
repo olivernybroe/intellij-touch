@@ -34,7 +34,7 @@ public class TouchBar {
         jTouchBar = new JTouchBar();
         jTouchBar.setCustomizationIdentifier("intellij-touch");
 
-        jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
+        //jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
 
 
         JFrame frame = new JFrame();
@@ -51,7 +51,7 @@ public class TouchBar {
         TouchBarButton touchBarButton = new TouchBarButton();
         touchBarButton.setImage(button.getIcon());
         touchBarButton.setTitle(button.getText());
-        touchBarButton.setBezelColor(button.getBezelColor());
+        //touchBarButton.setBezelColor(button.getBezelColor());
         touchBarButton.setAction(touchBarView -> {
             ApplicationManager.getApplication()
                 .invokeLater(() -> this.runAction(button.getAction()));
