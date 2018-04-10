@@ -1,11 +1,13 @@
 <idea-plugin>
     <id>dk.lost_world.intellij-touch</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <name>intellij-touch</name>
+    <vendor email="olivernybroe@gmail.com" url="https://github.com/olivernybroe/intellij-touch">Lost-World</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    MacBook Touch bar support for Intellij. <br>
+    This project adds some simple buttons for the MacBook touch bar, right now support for customizing is WIP. <br>
+
+    If there is a button you think should be there or want to help develop, just go to the github page.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

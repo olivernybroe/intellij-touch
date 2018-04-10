@@ -9,3 +9,4 @@ out
 *.ipr
 *.iws
 build
+gradle.properties

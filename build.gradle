@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.2.18"
+    id "org.jetbrains.intellij" version "0.3.1"
 }
 
 apply plugin: 'idea'
@@ -11,6 +11,12 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 intellij {
     pluginName 'intellij-touch'
+}
+
+publishPlugin {
+    username publishUsername
+    password publishPassword
+    channels publishChannel
 }
 
 group 'dk.lost_world'
