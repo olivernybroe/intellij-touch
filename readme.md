@@ -23,11 +23,11 @@ There Should now be a new menu called `Touch Bar`, from here you can just add it
 
 It could for example be like this
 
-![settings](https://raw.githubusercontent.com/olivernybre/intellij-touch/master/docs/settings.png)
+![settings](https://github.com/olivernybroe/intellij-touch/raw/master/docs/settings.png)
 
 Which would generate the following
 
-![example](https://raw.githubusercontent.com/olivernybre/intellij-touch/master/docs/example.png)
+![example](https://github.com/olivernybroe/intellij-touch/raw/master/docs/example.png)
 
 
 ## Built with
