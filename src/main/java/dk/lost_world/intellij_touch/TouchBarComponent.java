@@ -51,13 +51,5 @@ public class TouchBarComponent implements ProjectComponent {
         if(touchBarGroup instanceof CustomisedActionGroup) {
 
         }
-
-        ActionManager.getInstance().addAnActionListener(new AnActionListener() {
-            @Override
-            public void beforeActionPerformed(AnAction action, DataContext dataContext, AnActionEvent event) {
-                System.out.println(action+" templateText:"+action.getTemplatePresentation().getText());
-            }
-        });
-
     }
 }
