@@ -11,6 +11,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 intellij {
     pluginName 'intellij-touch'
+    version 2018.1
+    updateSinceUntilBuild false
 }
 
 publishPlugin {
