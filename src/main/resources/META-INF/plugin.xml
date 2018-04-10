@@ -19,14 +19,15 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="dk.lost_world.intellij_touch.TouchBar"/>
+        <customizableActionGroupProvider
+                implementation="dk.lost_world.intellij_touch.Settings.TouchBarCustomizableActionGroupProvider"
+        />
     </extensions>
 
     <actions>
-        <group id="TouchBar" class="dk.lost_world.intellij_touch.TouchBarGroup" popup="true"
-               text="Touch Bar" description="Extending AnAction Demo">
-            <add-to-group group-id="ViewMenu" anchor="first"/>
+        <group id="dk.lost_world.intellij_touch.TouchBar">
+            <reference id="OpenFile"/>
         </group>
-
     </actions>
 
     <project-components>

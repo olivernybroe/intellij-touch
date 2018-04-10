@@ -2,7 +2,9 @@ package dk.lost_world.intellij_touch.Button;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.Separator;
 import com.thizzer.jtouchbar.common.Image;
+import dk.lost_world.intellij_touch.Component.ComponentBuilder;
 import dk.lost_world.intellij_touch.TouchBar;
 import jiconfont.IconCode;
 import jiconfont.swing.IconFontSwing;
@@ -18,7 +20,7 @@ import java.io.InputStream;
 
 import static com.intellij.util.ui.UIUtil.*;
 
-public class ButtonBuilder {
+public class ButtonBuilder extends ComponentBuilder{
     public final int ICON_SIZE = 36;
     public final Color ICON_COLOR = Color.WHITE;
     public final com.thizzer.jtouchbar.common.Color BEZEL_COLOR = com.thizzer.jtouchbar.common.Color.CONTROL_COLOR;
@@ -28,18 +30,8 @@ public class ButtonBuilder {
     private Image icon;
     private com.thizzer.jtouchbar.common.Color bezelColor = BEZEL_COLOR;
 
-    private TouchBar touchBar;
-
-    public ButtonBuilder(TouchBar touchBar) {
-        this.touchBar = touchBar;
-    }
-
     public ButtonBuilder() {
-        this(TouchBar.getInstance());
-    }
-
-    public static ButtonBuilder builder(TouchBar touchBar) {
-        return new ButtonBuilder(touchBar);
+        super();
     }
 
     public static ButtonBuilder builder() {

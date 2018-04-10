@@ -14,7 +14,7 @@ import com.thizzer.jtouchbar.item.TouchBarItem;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
 import dk.lost_world.intellij_touch.Button.Button;
 import dk.lost_world.intellij_touch.Button.ButtonBuilder;
-import dk.lost_world.intellij_touch.Icons.FontAwesomePro;
+import dk.lost_world.intellij_touch.Component.SeparatorBuilder;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
@@ -60,6 +60,11 @@ public class TouchBar {
 
         jTouchBar.show(WindowManager.getInstance().findVisibleFrame());
 
+        return this;
+    }
+
+    public TouchBar addSeparator(SeparatorBuilder builder) {
+        jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFixedSpaceSmall));
         return this;
     }
 

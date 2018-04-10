@@ -1,39 +1,36 @@
 package dk.lost_world.intellij_touch;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.ide.ui.customization.CustomActionsSchema;
+import com.intellij.ide.ui.customization.CustomisedActionGroup;
+import com.intellij.ide.ui.customization.CustomizationUtil;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
+import com.intellij.openapi.application.ApplicationListener;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.ProjectComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.util.IconLoader;
-import com.intellij.openapi.wm.WindowManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.editor.colors.EditorColorsManager;
+import com.intellij.remoteServer.impl.runtime.ui.ServersToolWindowContent;
+import com.intellij.util.messages.MessageBusConnection;
 import com.thizzer.jtouchbar.JTouchBar;
-import com.thizzer.jtouchbar.common.Image;
-import com.thizzer.jtouchbar.common.ImageAlignment;
-import com.thizzer.jtouchbar.common.ImageName;
-import com.thizzer.jtouchbar.item.TouchBarItem;
-import com.thizzer.jtouchbar.item.view.TouchBarButton;
-import com.thizzer.jtouchbar.item.view.TouchBarScrubber;
-import com.thizzer.jtouchbar.item.view.TouchBarTextField;
-import com.thizzer.jtouchbar.item.view.TouchBarView;
-import com.thizzer.jtouchbar.item.view.action.TouchBarViewAction;
-import com.thizzer.jtouchbar.scrubber.ScrubberActionListener;
-import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
 import dk.lost_world.intellij_touch.Button.ButtonBuilder;
-import dk.lost_world.intellij_touch.Icons.FontAwesomePro;
+import dk.lost_world.intellij_touch.Component.ComponentBuilder;
 import jiconfont.icons.FontAwesome;
+import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-import java.io.IOException;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.stream.Stream;
 
 public class TouchBarComponent implements ProjectComponent {
 
     @Override
     public void initComponent() {
         System.out.println("works yes");
+
 
         JTouchBar jTouchBar = new JTouchBar();
         jTouchBar.setCustomizationIdentifier("intellij-touch");
@@ -42,50 +39,18 @@ public class TouchBarComponent implements ProjectComponent {
 
         TouchBar touchBar = TouchBar.getInstance();
 
-        ButtonBuilder.builder()
-            .action(IdeActions.ACTION_DEFAULT_RUNNER)
-            .icon(AllIcons.Actions.Execute)
-            .identifier("run_button")
-        .add();
+        ActionGroup touchBarGroup = (ActionGroup)
+            CustomActionsSchema.getInstance().getCorrectedAction("dk.lost_world.intellij_touch.TouchBar");
 
-        ButtonBuilder.builder()
-            .action(IdeActions.ACTION_DEFAULT_DEBUGGER)
-            .icon(AllIcons.Actions.StartDebugger)
-            .identifier("run_debug_button")
-        .add();
+        // Add all the buttons to the Touch bar.
+        Stream.of(touchBarGroup.getChildren(null)).forEach(anAction ->
+                ComponentBuilder.fromAction(anAction).add()
+        );
+        System.out.println(touchBarGroup.getClass());
 
-        ButtonBuilder.builder()
-            .action(IdeActions.ACTION_EDITOR_REFORMAT)
-            .icon(FontAwesome.CODE)
-            .identifier("reformat_button")
-        .add();
+        if(touchBarGroup instanceof CustomisedActionGroup) {
 
-        /*
-        ButtonBuilder.builder()
-            .action(IdeActions.ACTION_COMMENT_LINE)
-            .icon(FontAwesome.COMMENT)
-            .identifier("comment_button")
-        .add();
-
-        ButtonBuilder.builder()
-            .action(IdeActions.ACTION_COMMENT_BLOCK)
-            .icon(FontAwesome.COMMENTS)
-            .identifier("comment_block_button")
-        .add();
-        */
-
-        ButtonBuilder.builder()
-            .action("Vcs.UpdateProject")
-            .icon(AllIcons.Actions.CheckOut)
-            .identifier("vcs_update_button")
-        .add();
-
-
-        ButtonBuilder.builder()
-            .action("CheckinProject")
-            .icon(AllIcons.Actions.Commit)
-            .identifier("vcs_commit_button")
-            .add();
+        }
 
         ActionManager.getInstance().addAnActionListener(new AnActionListener() {
             @Override
@@ -93,5 +58,6 @@ public class TouchBarComponent implements ProjectComponent {
                 System.out.println(action+" templateText:"+action.getTemplatePresentation().getText());
             }
         });
+
     }
 }
