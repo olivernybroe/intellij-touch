@@ -29,8 +29,8 @@ public class TouchBar {
     }
 
     public TouchBar() {
-        //IconFontSwing.register(FontAwesome.getIconFont());
-        IconFontSwing.register(FontAwesomePro.getIconFont());
+        IconFontSwing.register(FontAwesome.getIconFont());
+        //IconFontSwing.register(FontAwesomePro.getIconFont());
         jTouchBar = new JTouchBar();
         jTouchBar.setCustomizationIdentifier("intellij-touch");
 
@@ -51,7 +51,7 @@ public class TouchBar {
         TouchBarButton touchBarButton = new TouchBarButton();
         touchBarButton.setImage(button.getIcon());
         touchBarButton.setTitle(button.getText());
-        //touchBarButton.setBezelColor(button.getBezelColor());
+        touchBarButton.setBezelColor(button.getBezelColor());
         touchBarButton.setAction(touchBarView -> {
             ApplicationManager.getApplication()
                 .invokeLater(() -> this.runAction(button.getAction()));

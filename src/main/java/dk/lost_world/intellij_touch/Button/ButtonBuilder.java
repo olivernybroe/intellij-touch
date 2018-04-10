@@ -8,18 +8,20 @@ import jiconfont.IconCode;
 import jiconfont.swing.IconFontSwing;
 import org.jetbrains.annotations.NonNls;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.intellij.util.ui.UIUtil.*;
+
 public class ButtonBuilder {
     public final int ICON_SIZE = 36;
     public final Color ICON_COLOR = Color.WHITE;
-    public final com.thizzer.jtouchbar.common.Color BEZEL_COLOR = com.thizzer.jtouchbar.common.Color.DARK_GRAY;
+    public final com.thizzer.jtouchbar.common.Color BEZEL_COLOR = com.thizzer.jtouchbar.common.Color.CONTROL_COLOR;
     private String identifier;
     private AnAction action;
     private String title = null;
@@ -84,6 +86,10 @@ public class ButtonBuilder {
         return this;
     }
 
+    public ButtonBuilder icon(Icon icon) {
+        return this.icon(iconToImage(icon));
+    }
+
     public ButtonBuilder icon(InputStream imageStream) throws IOException {
         return this.icon(new Image(imageStream));
     }
@@ -142,6 +148,19 @@ public class ButtonBuilder {
             System.out.println(ex.getMessage());
         }
         return baos.toByteArray();
+    }
+
+    static BufferedImage iconToImage(Icon icon) {
+        BufferedImage image = createImage(
+            icon.getIconWidth(),
+            icon.getIconHeight(),
+            BufferedImage.TYPE_INT_ARGB
+        );
+        Graphics g = image.createGraphics();
+        // paint the Icon to the BufferedImage.
+        icon.paintIcon(null, g, 0,0);
+        g.dispose();
+        return image;
     }
 
     public void add() {

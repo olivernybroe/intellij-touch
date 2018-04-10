@@ -1,9 +1,11 @@
 package dk.lost_world.intellij_touch;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.wm.WindowManager;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.common.Image;
@@ -38,83 +40,27 @@ public class TouchBarComponent implements ProjectComponent {
 
         //jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
 
-
-        JFrame frame = new JFrame();
-        frame.pack();
-        frame.setVisible(true);
-        jTouchBar.show(WindowManager.getInstance().findVisibleFrame());
-
-        // flexible space
-        jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
-
-// fixed space
-        jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFixedSpaceSmall));
-
-// button
-        TouchBarButton touchBarButtonImg = new TouchBarButton();
-        touchBarButtonImg.setTitle("Button 1");
-        touchBarButtonImg.setAction(new TouchBarViewAction() {
-            @Override
-            public void onCall( TouchBarView view ) {
-                System.out.println("Clicked Button_1.");
-            }
-        });
-
-        Image image = new Image(ImageName.NSImageNameTouchBarColorPickerFill, false);
-        touchBarButtonImg.setImage(image);
-
-        jTouchBar.addItem(new TouchBarItem("Button_1", touchBarButtonImg, true));
-
-// label
-        TouchBarTextField touchBarTextField = new TouchBarTextField();
-        touchBarTextField.setStringValue("TextField 1");
-
-        jTouchBar.addItem(new TouchBarItem("TextField_1", touchBarTextField, true));
-
-// scrubber
-        TouchBarScrubber touchBarScrubber = new TouchBarScrubber();
-        touchBarScrubber.setActionListener(new ScrubberActionListener() {
-            @Override
-            public void didSelectItemAtIndex(TouchBarScrubber scrubber, long index) {
-                System.out.println("Selected Scrubber Index: " + index);
-            }
-        });
-        touchBarScrubber.setDataSource(new ScrubberDataSource() {
-            @Override
-            public ScrubberView getViewForIndex(TouchBarScrubber scrubber, long index) {
-                if(index == 0) {
-                    ScrubberTextItemView textItemView = new ScrubberTextItemView();
-                    textItemView.setIdentifier("ScrubberItem_1");
-                    textItemView.setStringValue("Scrubber TextItem");
-
-                    return textItemView;
-                }
-                else {
-                    ScrubberImageItemView imageItemView = new ScrubberImageItemView();
-                    imageItemView.setIdentifier("ScrubberItem_2");
-                    imageItemView.setImage(new Image(ImageName.NSImageNameTouchBarAlarmTemplate, false));
-                    imageItemView.setAlignment(ImageAlignment.CENTER);
-
-                    return imageItemView;
-                }
-            }
-
-            @Override
-            public int getNumberOfItems(TouchBarScrubber scrubber) {
-                return 2;
-            }
-        });
-
-        /*
         TouchBar touchBar = TouchBar.getInstance();
 
+        ButtonBuilder.builder()
+            .action(IdeActions.ACTION_DEFAULT_RUNNER)
+            .icon(AllIcons.Actions.Execute)
+            .identifier("run_button")
+        .add();
+
+        ButtonBuilder.builder()
+            .action(IdeActions.ACTION_DEFAULT_DEBUGGER)
+            .icon(AllIcons.Actions.StartDebugger)
+            .identifier("run_debug_button")
+        .add();
 
         ButtonBuilder.builder()
             .action(IdeActions.ACTION_EDITOR_REFORMAT)
             .icon(FontAwesome.CODE)
-            .identifier("undo_button")
+            .identifier("reformat_button")
         .add();
 
+        /*
         ButtonBuilder.builder()
             .action(IdeActions.ACTION_COMMENT_LINE)
             .icon(FontAwesome.COMMENT)
@@ -126,21 +72,20 @@ public class TouchBarComponent implements ProjectComponent {
             .icon(FontAwesome.COMMENTS)
             .identifier("comment_block_button")
         .add();
+        */
 
         ButtonBuilder.builder()
             .action("Vcs.UpdateProject")
-            .icon(FontAwesome.UPLOAD)
+            .icon(AllIcons.Actions.CheckOut)
             .identifier("vcs_update_button")
         .add();
 
+
         ButtonBuilder.builder()
             .action("CheckinProject")
-            .title("Commit")
-            //.icon(getClass().getClassLoader().getResourceAsStream("icons/git-commit.png"))
-            .identifier("vcs_commit")
+            .icon(AllIcons.Actions.Commit)
+            .identifier("vcs_commit_button")
             .add();
-
-        */
 
         ActionManager.getInstance().addAnActionListener(new AnActionListener() {
             @Override
