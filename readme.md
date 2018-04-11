@@ -1,15 +1,23 @@
 # IntelliJ Touch Bar
+![cover](https://github.com/olivernybroe/intellij-touch/raw/master/docs/cover.png)
+
 
 This plugin adds support for the MacBook Touch bar in IntelliJ IDE's.
 
 The plugin is waiting for approval so right now you will have to install it manually.
 
+Right now the plugin does not support automatic update of settings and requires a restart of the IDE before the changes takes affect.
 
 ## Features
 
 - Customizable
 - MacBook Pro Touch Bar
 - Uses IntelliJ's structure for setup
+
+## Automatic install (Waiting approval)
+- Go To `Preferences` -> `Plugins` -> `Browse repositories...`
+- Search for `intellij-touch` and install
+- Restart the IDE and you are up and running!
 
 ## Manual install
 - Download latest release
@@ -32,4 +40,4 @@ Which would generate the following
 
 ## Built with
 
-- [JTouchBar](https://github.com/Thizzer/JTouchBar) - Java library for using the touchbar API on supported macbooks.
+- [JTouchBar](https://github.com/Thizzer/JTouchBar) - Java library for using the touchbar API on supported macbooks. Thanks @Thizzer
