@@ -50,8 +50,8 @@
 
     <project-components>
         <component>
-            <implementation-class>dk.lost_world.intellij_touch.TouchBarComponent</implementation-class>
-            <interface-class>dk.lost_world.intellij_touch.TouchBarComponent</interface-class>
+            <implementation-class>dk.lost_world.intellij_touch.TouchBarProjectComponent</implementation-class>
+            <interface-class>dk.lost_world.intellij_touch.TouchBarProjectComponent</interface-class>
         </component>
     </project-components>
 </idea-plugin>

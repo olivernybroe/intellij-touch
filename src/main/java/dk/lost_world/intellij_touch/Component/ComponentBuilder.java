@@ -1,11 +1,12 @@
 package dk.lost_world.intellij_touch.Component;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.Separator;
-import dk.lost_world.intellij_touch.Button.ButtonBuilder;
+import com.intellij.ide.DataManager;
+import com.intellij.ide.ui.customization.CustomisedActionGroup;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import dk.lost_world.intellij_touch.TouchBar;
 
-public abstract class ComponentBuilder {
+public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
 
     protected TouchBar touchBar;
 
@@ -13,32 +14,48 @@ public abstract class ComponentBuilder {
         this.touchBar = touchBar;
     }
 
-    public ComponentBuilder() {
-        this(TouchBar.getInstance());
+    public ComponentBuilder() {}
+
+    public ComponentBuilder touchBar(TouchBar touchBar) {
+         this.touchBar = touchBar;
+         return this;
     }
 
     public static ComponentBuilder fromAction(AnAction anAction) {
         if(anAction instanceof Separator) {
-            return new SeparatorBuilder();
+            return new SeparatorBuilder().fromAnAction(anAction);
         }
-
-        if(anAction.getTemplatePresentation().getText() == null && anAction.getTemplatePresentation().getIcon() == null) {
-            throw new RuntimeException("Invalid action.");
-        }
-
-        ButtonBuilder builder = new ButtonBuilder();
-
-        if(anAction.getTemplatePresentation().getIcon() == null) {
-            builder.title(anAction.getTemplatePresentation().getText());
+        else if(anAction instanceof CustomisedActionGroup) {
+            return new PopoverBuilder().fromAnAction(anAction);
         }
         else {
-            builder.icon(anAction.getTemplatePresentation().getIcon());
+            return new ButtonBuilder().fromAnAction(anAction);
         }
-        builder.action(anAction);
-        builder.identifier(anAction.toString());
-        return builder;
     }
 
+    public abstract BUILDER fromAnAction(AnAction action);
 
     public abstract void add();
+
+    protected void runAction(AnAction anAction) {
+        AnActionEvent anActionEvent = new AnActionEvent(
+            null,
+            DataManager.getInstance().getDataContextFromFocus().getResult(),
+            ActionPlaces.MAIN_MENU,
+            anAction.getTemplatePresentation(),
+            ActionManager.getInstance(),
+            0
+        );
+
+        ActionUtil.performDumbAwareUpdate(
+            false,
+            anAction,
+            anActionEvent,
+            true
+        );
+
+        if (anActionEvent.getPresentation().isEnabled() && anActionEvent.getPresentation().isVisible()) {
+            anAction.actionPerformed(anActionEvent);
+        }
+    }
 }
