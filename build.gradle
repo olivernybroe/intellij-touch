@@ -23,7 +23,7 @@ publishPlugin {
 
 group 'dk.lost_world'
 
-version 0.2
+version 0.21
 
 repositories {
     mavenCentral()
