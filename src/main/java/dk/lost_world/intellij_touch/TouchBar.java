@@ -30,16 +30,9 @@ public class TouchBar {
 
     public TouchBar() {
         IconFontSwing.register(FontAwesome.getIconFont());
-        //IconFontSwing.register(FontAwesomePro.getIconFont());
+
         jTouchBar = new JTouchBar();
         jTouchBar.setCustomizationIdentifier("intellij-touch");
-
-        //jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
-
-
-        JFrame frame = new JFrame();
-        frame.pack();
-        frame.setVisible(true);
         jTouchBar.show(WindowManager.getInstance().findVisibleFrame());
     }
 

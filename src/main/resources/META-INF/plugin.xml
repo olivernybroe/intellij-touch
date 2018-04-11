@@ -5,11 +5,15 @@
 
     <description><![CDATA[
     MacBook Touch bar support for Intellij. <br>
-    This project adds some simple buttons for the MacBook touch bar, right now support for customizing is WIP. <br>
+    This project has full support for customization of the buttons.<br>
 
-    If there is a button you think should be there or want to help develop, just go to the github page.
+    Contributions are welcome!
     ]]></description>
+    <change-notes>
+        
+    </change-notes>
     <idea-version since-build="171"/>
+
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->

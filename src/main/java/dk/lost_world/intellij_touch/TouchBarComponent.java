@@ -31,12 +31,6 @@ public class TouchBarComponent implements ProjectComponent {
     public void initComponent() {
         System.out.println("works yes");
 
-
-        JTouchBar jTouchBar = new JTouchBar();
-        jTouchBar.setCustomizationIdentifier("intellij-touch");
-
-        //jTouchBar.addItem(new TouchBarItem(TouchBarItem.NSTouchBarItemIdentifierFlexibleSpace));
-
         TouchBar touchBar = TouchBar.getInstance();
 
         ActionGroup touchBarGroup = (ActionGroup)
