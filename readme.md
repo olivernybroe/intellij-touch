@@ -20,7 +20,7 @@ Right now the plugin does not support automatic update of settings and requires 
 - Restart the IDE and you are up and running!
 
 ## Manual install
-- Download latest release
+- Download latest release from [release page](https://github.com/olivernybroe/intellij-touch/releases).
 - Go to `Preferences` -> `Plugins` -> `Install plugin from disk...` and select the file.
 - Restart your IDE and you are good to go!
 
