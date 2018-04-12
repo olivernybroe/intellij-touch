@@ -1,6 +1,5 @@
-package dk.lost_world.intellij_touch.Component;
+package dk.lost_world.intellij_touch.Components;
 
-import com.intellij.ide.ui.customization.CustomisedActionGroup;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import dk.lost_world.intellij_touch.TouchBar;
 

@@ -4,7 +4,7 @@ import com.intellij.ide.ui.customization.CustomActionsSchema;
 import com.intellij.ide.ui.customization.CustomisedActionGroup;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.components.ProjectComponent;
-import dk.lost_world.intellij_touch.Component.TouchBarBuilder;
+import dk.lost_world.intellij_touch.Components.TouchBarBuilder;
 
 public class TouchBarProjectComponent implements ProjectComponent {
 
@@ -17,10 +17,5 @@ public class TouchBarProjectComponent implements ProjectComponent {
 
         // Add all the buttons to the Touch bar.
         TouchBarBuilder.fromAction(touchBarGroup).apply();
-        System.out.println(touchBarGroup.getClass());
-
-        if(touchBarGroup instanceof CustomisedActionGroup) {
-
-        }
     }
 }

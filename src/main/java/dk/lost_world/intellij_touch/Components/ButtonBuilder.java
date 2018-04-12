@@ -1,4 +1,4 @@
-package dk.lost_world.intellij_touch.Component;
+package dk.lost_world.intellij_touch.Components;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.application.ApplicationManager;

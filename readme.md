@@ -29,6 +29,8 @@ Right now the plugin does not support automatic update of settings and requires 
 For setting up the touch bar, go to `Appearance & Behavior` -> `Menus and Toolbars`. \
 There Should now be a new menu called `Touch Bar`, from here you can just add items to the menu like you normally would.
 
+> Works best with actions from `Main Menu` as they often contains icons.
+
 It could for example be like this
 
 ![settings](https://github.com/olivernybroe/intellij-touch/raw/master/docs/settings.png)
@@ -36,6 +38,14 @@ It could for example be like this
 Which would generate the following
 
 ![example](https://github.com/olivernybroe/intellij-touch/raw/master/docs/example.png)
+
+
+## Plugin developers
+If you have a plugin and would like to add support for the touch bar, you can do it easily by adding custom actions in your own actionGroup.
+
+Remember to add icons!
+
+![plugin_devs](https://github.com/olivernybroe/intellij-touch/raw/master/docs/plugin_devs.png)
 
 
 ## Built with

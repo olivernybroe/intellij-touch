@@ -1,13 +1,10 @@
-package dk.lost_world.intellij_touch.Component;
+package dk.lost_world.intellij_touch.Components;
 
 import com.intellij.ide.ui.customization.CustomisedActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.thizzer.jtouchbar.item.GroupTouchBarItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PopoverBuilder extends ComponentBuilder<PopoverBuilder> {
 

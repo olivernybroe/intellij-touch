@@ -4,7 +4,6 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.wm.WindowManager;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.item.TouchBarItem;
-import dk.lost_world.intellij_touch.Component.SeparatorBuilder;
 import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
