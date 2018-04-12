@@ -21,6 +21,11 @@
                 <li>Fixed some stability issues.</li>
             </ul>
             <br/>
+            <b>Changes in version 0.3:</b>
+            <ul>
+                <li>Added simple UI for refreshing touch bar.</li>
+            </ul>
+            <br/>
         </html>
         ]]>
     </change-notes>
@@ -35,7 +40,10 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <applicationConfigurable groupId="appearance"
+                                 parentId="preferences.customizations"
+                                 instance="dk.lost_world.intellij_touch.Settings.TouchBarConfigurable"
+                                 id="preferences.intellij-touch"/>
         <projectService serviceImplementation="dk.lost_world.intellij_touch.TouchBar"/>
         <customizableActionGroupProvider
                 implementation="dk.lost_world.intellij_touch.Settings.TouchBarCustomizableActionGroupProvider"

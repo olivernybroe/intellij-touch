@@ -22,11 +22,6 @@ public class TouchBarProjectComponent implements ProjectComponent {
     @Override
     public void projectOpened() {
         TouchBar touchBar = TouchBar.getInstance(project);
-
-        ActionGroup touchBarGroup = (ActionGroup)
-            CustomActionsSchema.getInstance().getCorrectedAction("dk.lost_world.intellij_touch.TouchBar");
-
-        // Add all the buttons to the Touch bar.
-        TouchBarBuilder.fromAction(touchBarGroup).apply(touchBar);
+        touchBar.refresh();
     }
 }
