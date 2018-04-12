@@ -1,6 +1,8 @@
 package dk.lost_world.intellij_touch.Components;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
+import com.thizzer.jtouchbar.item.TouchBarItem;
+import com.thizzer.jtouchbar.item.view.TouchBarTextField;
 import dk.lost_world.intellij_touch.TouchBar;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class TouchBarBuilder {
 
     protected Collection<ComponentBuilder> components;
 
-    public TouchBarBuilder() {
+    protected TouchBarBuilder() {
         components = new ArrayList<>();
     }
 

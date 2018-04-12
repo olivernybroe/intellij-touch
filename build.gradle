@@ -23,7 +23,7 @@ publishPlugin {
 
 group 'dk.lost_world'
 
-version 0.21
+version 0.22
 
 repositories {
     mavenCentral()
@@ -33,9 +33,9 @@ repositories {
 }
 
 dependencies {
+    compile files('libs/jtouchbar-0.1.0-SNAPSHOT.jar', 'libs/org.eclipse.swt.cocoa.macosx.x86_64-4.6.1.jar')
     compile 'com.google.code.gson:gson:2.3.1'
     compile group: 'com.github.jiconfont', name: 'jiconfont', version: '1.0.0'
-    compile group: 'com.thizzer.jtouchbar', name: 'jtouchbar', version: '0.1.0-SNAPSHOT'
     compile group: 'com.github.jiconfont', name: 'jiconfont-swing', version: '1.0.0'
     compile group: 'com.github.jiconfont', name: 'jiconfont-font_awesome', version: '4.7.0.0'
 }

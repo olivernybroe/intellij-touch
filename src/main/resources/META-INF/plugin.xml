@@ -47,11 +47,9 @@
             <reference id="OpenFile"/>
         </group>
     </actions>
-
     <project-components>
         <component>
             <implementation-class>dk.lost_world.intellij_touch.TouchBarProjectComponent</implementation-class>
-            <interface-class>dk.lost_world.intellij_touch.TouchBarProjectComponent</interface-class>
         </component>
     </project-components>
 </idea-plugin>
