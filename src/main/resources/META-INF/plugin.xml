@@ -21,9 +21,10 @@
                 <li>Fixed some stability issues.</li>
             </ul>
             <br/>
-            <b>Changes in version 0.3:</b>
+            <b>Changes in version 0.4:</b>
             <ul>
                 <li>Added simple UI for refreshing touch bar.</li>
+                <li>Changed back to use JTouchbar from gradle. </li>
             </ul>
             <br/>
         </html>

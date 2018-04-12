@@ -1,5 +1,6 @@
 package dk.lost_world.intellij_touch.Components;
 
+import com.intellij.execution.ExecutorRegistry;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.ui.customization.CustomisedActionGroup;
 import com.intellij.openapi.actionSystem.*;
@@ -10,6 +11,8 @@ public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
 
     protected TouchBar touchBar;
 
+    protected String identifier;
+
     public ComponentBuilder(TouchBar touchBar) {
         this.touchBar = touchBar;
     }
@@ -19,6 +22,11 @@ public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
     public ComponentBuilder touchBar(TouchBar touchBar) {
          this.touchBar = touchBar;
          return this;
+    }
+
+    public ComponentBuilder identifier(String identifier) {
+        this.identifier = identifier;
+        return this;
     }
 
     public static ComponentBuilder fromAction(AnAction anAction) {

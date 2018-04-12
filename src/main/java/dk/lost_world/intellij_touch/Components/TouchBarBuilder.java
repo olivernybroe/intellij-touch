@@ -1,6 +1,7 @@
 package dk.lost_world.intellij_touch.Components;
 
 import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.project.Project;
 import com.thizzer.jtouchbar.item.TouchBarItem;
 import com.thizzer.jtouchbar.item.view.TouchBarTextField;
 import dk.lost_world.intellij_touch.TouchBar;
@@ -30,5 +31,9 @@ public class TouchBarBuilder {
 
     public void apply(TouchBar touchBar) {
         components.forEach(componentBuilder -> componentBuilder.touchBar(touchBar).add());
+    }
+
+    public TouchBar build(Project project, String identifier) {
+        return new TouchBar(project, identifier);
     }
 }

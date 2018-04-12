@@ -17,7 +17,6 @@ import java.io.IOException;
 import static com.intellij.util.ui.UIUtil.createImage;
 
 public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
-    protected String identifier;
     protected AnAction action;
     protected String title = null;
     protected Image icon;
@@ -59,11 +58,6 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
 
     public ButtonBuilder action(AnAction action) {
         this.action = action;
-        return this;
-    }
-
-    public ButtonBuilder identifier(String identifier) {
-        this.identifier = identifier;
         return this;
     }
 

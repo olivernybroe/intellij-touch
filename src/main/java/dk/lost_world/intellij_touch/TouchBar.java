@@ -27,17 +27,29 @@ public class TouchBar {
     }
 
     public TouchBar(Project project) {
+        this(project, "");
+    }
+
+    public TouchBar(Project project, String identifier) {
         this.project = project;
         IconFontSwing.register(FontAwesome.getIconFont());
 
         jTouchBar = new JTouchBar();
-        jTouchBar.setCustomizationIdentifier("intellij-touch"+project.getName());
+        jTouchBar.setCustomizationIdentifier("intellij-touch"+project.getName()+identifier);
         jTouchBar.show(WindowManager.getInstance().getFrame(this.project));
     }
 
     public void addItem(TouchBarItem touchBarItem) {
         this.jTouchBar.addItem(touchBarItem);
         jTouchBar.show(WindowManager.getInstance().getFrame(this.project));
+    }
+
+    public Project project() {
+        return this.project;
+    }
+
+    public JTouchBar jTouchBar() {
+        return this.jTouchBar;
     }
 
     public void refresh() {
