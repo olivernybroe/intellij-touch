@@ -31,8 +31,4 @@ public class TouchBarBuilder {
     public void apply(TouchBar touchBar) {
         components.forEach(componentBuilder -> componentBuilder.touchBar(touchBar).add());
     }
-
-    public void apply() {
-        this.apply(TouchBar.getInstance());
-    }
 }
