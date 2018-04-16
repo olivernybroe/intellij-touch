@@ -1,7 +1,8 @@
 package dk.lost_world.intellij_touch;
 
 import com.intellij.ide.ui.customization.CustomActionsSchema;
-import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.WindowManager;
@@ -37,6 +38,15 @@ public class TouchBar {
         jTouchBar = new JTouchBar();
         jTouchBar.setCustomizationIdentifier("intellij-touch"+project.getName()+identifier);
         jTouchBar.show(WindowManager.getInstance().getFrame(this.project));
+
+
+        ActionManager.getInstance().addAnActionListener(new AnActionListener() {
+            @Override
+            public void beforeActionPerformed(AnAction action, DataContext dataContext, AnActionEvent event) {
+                System.out.println(action);
+                System.out.println(action.getTemplatePresentation().getIcon());
+            }
+        });
     }
 
     public void addItem(TouchBarItem touchBarItem) {

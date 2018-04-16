@@ -4,8 +4,17 @@ import com.intellij.execution.ExecutorRegistry;
 import com.intellij.ide.DataManager;
 import com.intellij.ide.ui.customization.CustomisedActionGroup;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
+import com.intellij.openapi.application.ApplicationManager;
 import dk.lost_world.intellij_touch.TouchBar;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+import static java.awt.event.ComponentEvent.COMPONENT_FIRST;
 
 public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
 
@@ -46,24 +55,11 @@ public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
     public abstract void add();
 
     protected void runAction(AnAction anAction) {
-        AnActionEvent anActionEvent = new AnActionEvent(
-            null,
-            DataManager.getInstance().getDataContextFromFocus().getResult(),
-            ActionPlaces.MAIN_MENU,
-            anAction.getTemplatePresentation(),
-            ActionManager.getInstance(),
-            0
-        );
+        final ActionManagerEx actionManagerEx = ActionManagerEx.getInstanceEx();
+        final KeyboardFocusManager focusManager=KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        final Component focusOwner = focusManager.getFocusedWindow();
 
-        ActionUtil.performDumbAwareUpdate(
-            false,
-            anAction,
-            anActionEvent,
-            true
-        );
-
-        if (anActionEvent.getPresentation().isEnabled() && anActionEvent.getPresentation().isVisible()) {
-            anAction.actionPerformed(anActionEvent);
-        }
+        final InputEvent ie = new KeyEvent(focusOwner, COMPONENT_FIRST, System.currentTimeMillis(), 0, 0, '\0');
+        actionManagerEx.tryToExecute(anAction, ie, focusOwner, ActionPlaces.UNKNOWN, false);
     }
 }
