@@ -16,12 +16,20 @@ import jiconfont.icons.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
 import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TouchBar {
 
     protected JTouchBar jTouchBar;
 
     protected Project project;
+
+    protected Collection<ItemListener> itemListeners;
 
     public static TouchBar getInstance(Project project) {
         return ServiceManager.getService(project, TouchBar.class);
@@ -32,6 +40,7 @@ public class TouchBar {
     }
 
     public TouchBar(Project project, String identifier) {
+        this.itemListeners = new ArrayList<>();
         this.project = project;
         IconFontSwing.register(FontAwesome.getIconFont());
 
@@ -40,11 +49,18 @@ public class TouchBar {
         jTouchBar.show(WindowManager.getInstance().getFrame(this.project));
 
 
-        ActionManager.getInstance().addAnActionListener(new AnActionListener() {
-            @Override
-            public void beforeActionPerformed(AnAction action, DataContext dataContext, AnActionEvent event) {
-                System.out.println(action);
-                System.out.println(action.getTemplatePresentation().getIcon());
+        ActionManager.getInstance().addAnActionListener((action, dataContext, event) -> {
+            Collection<ItemListener> listeners = itemListeners.stream()
+                .filter(_itemListener -> _itemListener.getAction()
+                    .equals(action)).collect(Collectors.toList());
+
+            if(!listeners.isEmpty()) {
+                listeners.forEach(itemListener ->
+                    itemListener.getAnActonListener().beforeActionPerformed(
+                        action, dataContext, event
+                    )
+                );
+                itemListeners.removeAll(listeners);
             }
         });
     }
@@ -52,6 +68,10 @@ public class TouchBar {
     public void addItem(TouchBarItem touchBarItem) {
         this.jTouchBar.addItem(touchBarItem);
         jTouchBar.show(WindowManager.getInstance().getFrame(this.project));
+    }
+
+    public void addItemListener(ItemListener listener) {
+        this.itemListeners.add(listener);
     }
 
     public Project project() {
@@ -69,5 +89,10 @@ public class TouchBar {
 
         // Add all the buttons to the Touch bar.
         TouchBarBuilder.fromAction(touchBarGroup).apply(this);
+    }
+
+    public interface ItemListener {
+        AnAction getAction();
+        AnActionListener getAnActonListener();
     }
 }

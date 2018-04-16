@@ -55,6 +55,9 @@
         <group id="dk.lost_world.intellij_touch.TouchBar">
             <reference id="OpenFile"/>
         </group>
+        <group id="TouchBar actions">
+            <action id="TouchBar.RunStop" class="dk.lost_world.intellij_touch.Actions.RunStopAction" text="Run/Stop" />
+        </group>
     </actions>
     <project-components>
         <component>

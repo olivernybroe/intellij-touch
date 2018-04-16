@@ -1,16 +1,23 @@
 package dk.lost_world.intellij_touch.Components;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.thizzer.jtouchbar.common.Color;
 import com.thizzer.jtouchbar.common.Image;
 import com.thizzer.jtouchbar.item.TouchBarItem;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
+import dk.lost_world.intellij_touch.TouchBar;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -95,6 +102,25 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
                 .invokeLater(() -> this.runAction(this.action))
         );
 
-        this.touchBar.addItem(new TouchBarItem(this.identifier, touchBarButton));
+        this.touchBar.addItem(
+            new TouchBarItem(this.identifier, touchBarButton)
+        );
+
+        this.touchBar.addItemListener(new TouchBar.ItemListener() {
+            @Override
+            public AnAction getAction() {
+                return ButtonBuilder.this.action;
+            }
+
+            @Override
+            public AnActionListener getAnActonListener() {
+                return (action, dataContext, event) -> event.getPresentation().addPropertyChangeListener(evt -> {
+                    if(evt.getPropertyName().equals("icon") && event.getPresentation().getIcon() != null) {
+                        ButtonBuilder.this.icon(event.getPresentation().getIcon());
+                        touchBarButton.setImage(ButtonBuilder.this.icon);
+                    }
+                });
+            }
+        });
     }
 }
