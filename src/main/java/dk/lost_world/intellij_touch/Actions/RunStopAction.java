@@ -9,6 +9,5 @@ public class RunStopAction extends RunAction {
     @Override
     protected void update(@NotNull AnActionEvent e, boolean running) {
         super.update(e, running);
-
     }
 }
