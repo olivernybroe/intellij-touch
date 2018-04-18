@@ -1,6 +1,7 @@
 package dk.lost_world.intellij_touch.Components;
 
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -108,18 +109,21 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
 
         this.touchBar.addItemListener(new TouchBar.ItemListener() {
             @Override
-            public AnAction getAction() {
-                return ButtonBuilder.this.action;
+            public String getActionId() {
+                return ActionManager.getInstance().getId(ButtonBuilder.this.action);
             }
 
             @Override
-            public AnActionListener getAnActonListener() {
-                return (action, dataContext, event) -> event.getPresentation().addPropertyChangeListener(evt -> {
-                    if(evt.getPropertyName().equals("icon") && event.getPresentation().getIcon() != null) {
-                        ButtonBuilder.this.icon(event.getPresentation().getIcon());
+            public PropertyChangeListener getPropertyChangeListener() {
+                return evt -> {
+                    System.out.println("something changed");
+                    System.out.println("property: " + evt.getPropertyName() );
+                    System.out.println("new value: "+ evt.getNewValue());
+                    if(evt.getPropertyName().equals("icon") && evt.getNewValue() != null) {
+                        ButtonBuilder.this.icon((Image) evt.getNewValue());
                         touchBarButton.setImage(ButtonBuilder.this.icon);
                     }
-                });
+                };
             }
         });
     }

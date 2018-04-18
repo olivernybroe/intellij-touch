@@ -31,6 +31,7 @@ public class TouchBarBuilder {
 
     public void apply(TouchBar touchBar) {
         components.forEach(componentBuilder -> componentBuilder.touchBar(touchBar).add());
+        touchBar.show();
     }
 
     public TouchBar build(Project project, String identifier) {
