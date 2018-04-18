@@ -120,7 +120,7 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
                     System.out.println("property: " + evt.getPropertyName() );
                     System.out.println("new value: "+ evt.getNewValue());
                     if(evt.getPropertyName().equals("icon") && evt.getNewValue() != null) {
-                        ButtonBuilder.this.icon((Image) evt.getNewValue());
+                        ButtonBuilder.this.icon((Icon) evt.getNewValue());
                         touchBarButton.setImage(ButtonBuilder.this.icon);
                     }
                 };
