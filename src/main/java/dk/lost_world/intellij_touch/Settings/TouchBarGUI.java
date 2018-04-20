@@ -36,9 +36,6 @@ import java.util.stream.Stream;
 public class TouchBarGUI {
     private JPanel rootPanel;
     private JButton refreshTouchBarButton;
-    private JButton buttonblaButton;
-    private JButton button2;
-    private JButton button3;
     private JTree itemsTree;
 
     public TouchBarGUI() {

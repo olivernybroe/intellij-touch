@@ -55,11 +55,13 @@ public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
     public abstract void add();
 
     protected void runAction(AnAction anAction) {
+
+
         final ActionManagerEx actionManagerEx = ActionManagerEx.getInstanceEx();
         final KeyboardFocusManager focusManager=KeyboardFocusManager.getCurrentKeyboardFocusManager();
         final Component focusOwner = focusManager.getFocusedWindow();
 
         final InputEvent ie = new KeyEvent(focusOwner, COMPONENT_FIRST, System.currentTimeMillis(), 0, 0, '\0');
-        actionManagerEx.tryToExecute(anAction, ie, focusOwner, ActionPlaces.UNKNOWN, false);
+        actionManagerEx.tryToExecute(anAction, ie, focusOwner, ActionPlaces.TOOLBAR, false);
     }
 }

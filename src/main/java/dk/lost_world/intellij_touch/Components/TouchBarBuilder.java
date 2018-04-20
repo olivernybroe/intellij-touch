@@ -7,6 +7,7 @@ import com.thizzer.jtouchbar.item.view.TouchBarTextField;
 import dk.lost_world.intellij_touch.TouchBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

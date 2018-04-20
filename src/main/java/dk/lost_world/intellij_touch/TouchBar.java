@@ -3,11 +3,17 @@ package dk.lost_world.intellij_touch;
 import com.intellij.ide.ui.customization.CustomActionsSchema;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
+import com.intellij.openapi.actionSystem.impl.PresentationFactory;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.WindowManager;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.common.Color;
+import com.thizzer.jtouchbar.common.Image;
+import com.thizzer.jtouchbar.common.ImageName;
+import com.thizzer.jtouchbar.item.PopoverTouchBarItem;
 import com.thizzer.jtouchbar.item.TouchBarItem;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
 import com.thizzer.jtouchbar.item.view.TouchBarTextField;
@@ -22,6 +28,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.intellij.openapi.application.ModalityState.NON_MODAL;
 
 public class TouchBar {
 
@@ -51,8 +59,6 @@ public class TouchBar {
         jTouchBar.show(this.touchBarFrame);
 
         ActionManager.getInstance().addAnActionListener((action, dataContext, event) -> {
-            System.out.println(event);
-            System.out.println(action+ ": "+ ActionManager.getInstance().getId(action));
             Collection<ItemListener> listeners = itemListeners.stream()
                 .filter(_itemListener -> _itemListener.getActionId()
                     .equals(ActionManager.getInstance().getId(action)))
@@ -62,6 +68,7 @@ public class TouchBar {
                 event.getPresentation().addPropertyChangeListener(
                     itemListener.getPropertyChangeListener()
                 );
+                itemListeners.remove(itemListener);
             });
         });
     }

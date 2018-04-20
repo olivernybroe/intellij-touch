@@ -1,11 +1,7 @@
 package dk.lost_world.intellij_touch.Components;
 
-import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.thizzer.jtouchbar.common.Color;
 import com.thizzer.jtouchbar.common.Image;
@@ -17,7 +13,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -69,7 +64,7 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
         return this;
     }
 
-    private byte [] getImgBytes(BufferedImage image) {
+    static byte [] getImgBytes(BufferedImage image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             ImageIO.write(image, "PNG", baos);
@@ -92,8 +87,7 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
         return image;
     }
 
-    @Override
-    public void add() {
+    public TouchBarButton build() {
         TouchBarButton touchBarButton = new TouchBarButton();
         touchBarButton.setImage(this.icon);
         touchBarButton.setTitle(this.title);
@@ -102,6 +96,12 @@ public class ButtonBuilder extends ComponentBuilder<ButtonBuilder> {
             ApplicationManager.getApplication()
                 .invokeLater(() -> this.runAction(this.action))
         );
+        return touchBarButton;
+    }
+
+    @Override
+    public void add() {
+        TouchBarButton touchBarButton = this.build();
 
         this.touchBar.addItem(
             new TouchBarItem(this.identifier, touchBarButton)
