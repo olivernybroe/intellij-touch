@@ -7,12 +7,15 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.util.ActionCallback;
 import dk.lost_world.intellij_touch.TouchBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import static java.awt.event.ComponentEvent.COMPONENT_FIRST;
 
@@ -55,13 +58,19 @@ public abstract class ComponentBuilder<BUILDER extends ComponentBuilder> {
     public abstract void add();
 
     protected void runAction(AnAction anAction) {
-
-
-        final ActionManagerEx actionManagerEx = ActionManagerEx.getInstanceEx();
-        final KeyboardFocusManager focusManager=KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        final Component focusOwner = focusManager.getFocusedWindow();
-
+        final Component focusOwner = FocusManager.getCurrentManager().getActiveWindow();
         final InputEvent ie = new KeyEvent(focusOwner, COMPONENT_FIRST, System.currentTimeMillis(), 0, 0, '\0');
-        actionManagerEx.tryToExecute(anAction, ie, focusOwner, ActionPlaces.TOOLBAR, false);
+
+        try {
+            AnActionEvent event = new AnActionEvent(
+                ie, DataManager.getInstance().getDataContextFromFocusAsync().blockingGet(500),
+                ActionPlaces.EDITOR_TAB,
+                anAction.getTemplatePresentation().clone(), ActionManager.getInstance(),
+                ie.getModifiersEx()
+            );
+            ActionUtil.performActionDumbAware(anAction, event);
+        } catch (TimeoutException | ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 }
