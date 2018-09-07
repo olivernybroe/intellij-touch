@@ -7,8 +7,6 @@
 # IntelliJ Touch Bar
 ![cover](https://github.com/olivernybroe/intellij-touch/raw/master/docs/cover.png)
 
-This plugin has been deprecated. IntelliJ now has support for the Touch bar with the most of our features. No further development will be made, instead we recommend you to update to IntelliJ 2018.2 for Touch bar support. If you would like to contribute, then do it directly to IntelliJ instead.
-
 This plugin adds support for the MacBook Touch bar in IntelliJ IDE's.
 
 Right now the plugin does not support automatic update of settings, so you have two ways of updating the touch bar
