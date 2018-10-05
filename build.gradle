@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0-M2'
+    }
+}
+
 plugins {
     id "org.jetbrains.intellij" version "0.3.1"
 }
@@ -5,6 +14,7 @@ plugins {
 apply plugin: 'idea'
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,4 +49,23 @@ dependencies {
     compile group: 'com.github.jiconfont', name: 'jiconfont', version: '1.0.0'
     compile group: 'com.github.jiconfont', name: 'jiconfont-swing', version: '1.0.0'
     compile group: 'com.github.jiconfont', name: 'jiconfont-font_awesome', version: '4.7.0.0'
+
+    //test dependencies
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.junit.platform:junit-platform-console:1.1.0-M2'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.1.0-M2'
+    testRuntime 'org.junit.vintage:junit-vintage-engine:5.1.0-M2'
+    testRuntime 'org.junit.platform:junit-platform-launcher:1.1.0-M2'
+    testRuntime 'org.junit.platform:junit-platform-runner:1.1.0-M2'
+    testCompile 'org.mockito:mockito-core:2.8.0'
+    testCompile 'org.powermock:powermock-api-mockito2:1.7.0RC2'
+    testCompile 'org.powermock:powermock-module-junit4:1.7.0'
+    testCompile 'org.powermock:powermock-core:1.7.0'
+    testCompile 'org.powermock:powermock-module-junit4-rule:1.7.0'
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-vintage'
+    }
 }
